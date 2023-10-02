@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} جزییات{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card bg-lightblue">
+    <div class="card-header">
+        <h3 class="card-title">جزییات روستا</h3>
+    </div>
+    <div class="col-10">
+    {% for field in object.get_fields %}
+    {% if field.0 == 'ID' %}
+    {% else %}
+    {% if field.2 == 'BooleanField' %}
+    <div class="col-6">
+        {% if field.1  %}
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" id="customCheckbox2" checked="">
+            <label for="customCheckbox2" class="custom-control-label">{{field.0}}</label>
+        </div>
+        {% else %}
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+            <label for="customCheckbox1" class="custom-control-label">{{field.0}}</label>
+        </div>
+        {% endif %}
+    </div>
+    {% elif field.2 == 'TextField' %}
+    <div class="callout callout-info">
+        <h5>{{field.0}}</h5>
+        <p>{{field.1}}</p>
+    </div>
+    {% else %}
+    <dl class="row col-4 m-3">
+        <dt class=""> {{field.0}} :</dt>
+        <dd class="">{{field.1}}</dd>
+    </dl>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

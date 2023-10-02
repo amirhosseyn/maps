@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} نقشه{% endblock %}
+{% block extra_head %}
+<head>
+  <style>
+    #map {
+      height: 913px;
+    }
+    </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet" />
+</head>
+{% endblock %}
+{% block content %}
+  <div id="map"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var map = L.map('map').setView([36.4182, 54.9763], 12);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      var markers = [
+      {% for location in locations %}
+        {
+          id: {{location.pk}},
+          latlng: [{{location.latitude}},{{location.longitude}}],
+          name: '{{location.name}}' ,
+          description:' جمعیت:{{location.population}}'
+        },
+        {% endfor %}
+      ];
+
+      markers.forEach(function (markerData) {
+        var marker = L.marker(markerData.latlng).addTo(map);
+        marker.bindPopup("<div class='custom-popup'><h3>" + markerData.name + "</h3><p class='description'>" + markerData.description + "</p><button class='more-info'>توضیحات بیشتر</button></div>");
+
+        marker.on('popupopen', function (e) {
+          var moreInfoButton = e.popup.getElement().querySelector('.more-info');
+          moreInfoButton.addEventListener('click', function () {
+            var markerID = markerData.id;
+            var markerDetailsURL = '/' + markerID + '/detail/';
+            window.open(markerDetailsURL, '_blank');
+          });
+        });
+      });
+    });
+  </script>
+{% endblock %}

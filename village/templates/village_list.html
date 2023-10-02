@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} لیست روستاها {% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+
+<body>
+    {% for object in object_list %}
+    {% empty %}
+    <p>No results found.</p>
+    {% endfor %}
+    <div class="bd-example">
+        <div class="table-responsive">
+            <table dir="rtl" class="table  table-light table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">عرض جغرافیایی</th>
+                        <th scope="col">طول جغرافیایی</th>
+                        <th scope="col">جزییات</th>
+                        <th scope="col">حذف</th>
+                        <th scope="col">ویرایش</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ object.name }}</td>
+                        <td>{{ object.latitude }}</td>
+                        <td>{{ object.longitude }}</td>
+                        <td>
+                            <a href="{% url 'village_detail' object.id %}" class="btn btn-primary">جزییات</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'village_delete' object.id %}" class="btn btn-danger">حذف</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'village_update' object.id %}" class="btn btn-success">ویرایش</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+{% endblock %}
