@@ -12,7 +12,7 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <form action="{% url 'login' %}" method="post">
+            <form action="{% url 'account:login' %}" method="post">
             {% csrf_token %}
             {{form | crispy}}
                 <!-- /.col -->
