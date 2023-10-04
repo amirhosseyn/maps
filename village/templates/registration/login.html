@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ورود{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="login-box">
+    <div class="login-logo">
+       صفحه ی ورود
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{form | crispy}}
+                <!-- /.col -->
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat"> ورود</button>
+                </div>
+                <!-- /.col -->
+        </div>
+        </form>
+    </div>
+    {% endblock %}

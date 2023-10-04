@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name 185.206.92.64;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/djngoproject/Maps/maps;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/djngoproject/Maps/maps/maps.sock;
+    }
+}

@@ -3,9 +3,10 @@ from django.forms import ModelForm
 from django.urls import reverse_lazy
 from . models import Village
 from village.form import VillageForm,SearchForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin,TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
@@ -15,7 +16,7 @@ class IndexView(TemplateView):
         return context
 
 
-class VillageCreateView(CreateView):
+class VillageCreateView(LoginRequiredMixin,CreateView):
     model = Village
     form_class = VillageForm
     template_name = "village_form.html"
@@ -30,19 +31,19 @@ class VillageCreateView(CreateView):
         }
         return context
 
-class VillageDeleteView(DeleteView):
+class VillageDeleteView(LoginRequiredMixin,DeleteView):
     model = Village
     template_name = "village_delete.html"
     success_url = reverse_lazy("village_list_view")
 
 
-class VillageUpdateView(UpdateView):
+class VillageUpdateView(LoginRequiredMixin,UpdateView):
     model = Village
     form_class = VillageForm
     template_name = "village_update.html"
     success_url = reverse_lazy("village_list_view")
 
-class VillageListView(ListView):
+class VillageListView(LoginRequiredMixin,ListView):
     model = Village
     template_name = "village_list.html"
     delete_view = VillageDeleteView
@@ -63,7 +64,7 @@ class VillageListView(ListView):
         return context
     
 
-class VillageDetailView(DetailView):
+class VillageDetailView(LoginRequiredMixin,DetailView):
     model = Village
     template_name = 'village_detail.html'
     

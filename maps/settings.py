@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "village.apps.VillageConfig",
+    "account.apps.AccountConfig",
     "django_extensions",
     'crispy_forms',
     'crispy_bootstrap4',
@@ -130,6 +131,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = "index"
+LOGIN_URL = "login"
 
 try:
     from local_settings import *
