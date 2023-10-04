@@ -6,7 +6,7 @@ from village.form import VillageForm,SearchForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class IndexView(LoginRequiredMixin,TemplateView):
+class IndexView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
@@ -64,7 +64,7 @@ class VillageListView(LoginRequiredMixin,ListView):
         return context
     
 
-class VillageDetailView(LoginRequiredMixin,DetailView):
+class VillageDetailView(DetailView):
     model = Village
     template_name = 'village_detail.html'
     

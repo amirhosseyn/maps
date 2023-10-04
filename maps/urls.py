@@ -20,9 +20,9 @@ from django.urls import path,include
 from village import views
 
 urlpatterns = [
-    path('', include('account.urls')),
+    path('account/', include('account.urls')),
     path("admin/", admin.site.urls),
-    path("index/", views.IndexView.as_view(), name="index"),
+    path("", views.IndexView.as_view(), name="index"),
     path('create/', views.VillageCreateView.as_view(), name='village_create'),  
     path("list_view/", views.VillageListView.as_view(), name="village_list_view"),
     path("<int:pk>/delete/", views.VillageDeleteView.as_view(), name="village_delete"),
