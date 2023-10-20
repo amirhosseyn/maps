@@ -124,8 +124,8 @@ class Village(models.Model):
     # Group: Other
     population_pyramid = models.TextField(
         default="", null=True, blank=True, verbose_name="هرم جمعیتی روستا ( وجود نیروی کار بومی)")
-    proximity_to_city = models.PositiveIntegerField(
-        default=0, verbose_name=" وابستگی به نزدیکترین شهر")
+    dependency_to_city = models.TextField(
+        default="", null=True, blank=True, verbose_name=" وابستگی به نزدیکترین شهر")
     welfare_committee_coverage = models.PositiveIntegerField(
         default=0, verbose_name="درصد تحت پوشش کمیته و بهزیستی نسبت به جمعیت")
     opportunities_potentials = models.TextField(
