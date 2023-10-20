@@ -6,10 +6,82 @@
     <div class="card-header">
         <h3 class="card-title">ویرایش روستا</h3>
     </div>
-    <form class="col-8" action="{% url 'village_update' object.id %}" method="post">
-        {% csrf_token %}
-        {{ form |crispy }}
-            <button type="submit" class="btn btn-success">ویرایش</button>
-    </form>
+    <form action="{% url 'village_update' object.id %}" method="post">
+    {% csrf_token %}
+    <div class="card card-primary card-outline card-tabs">
+        <div class="card-header p-0 pt-1 border-bottom-0">
+            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
+                        href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
+                        aria-selected="true">مشخصات کلی</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                        href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
+                        aria-selected="false">زیرساخت های روستا</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill"
+                        href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages"
+                        aria-selected="false">تهدیدها،فرصت ها و راهکارها</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="custom-tabs-three-tabContent">
+                <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel"
+                    aria-labelledby="custom-tabs-three-home-tab">
+                    
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel"
+                    aria-labelledby="custom-tabs-three-profile-tab">
+                    
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel"
+                    aria-labelledby="custom-tabs-three-messages-tab">
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="my_form" class="col-8" action="{% url 'village_update' object.id %}" method="post">
+        {{form|crispy}}
+        <button type="submit" class="btn btn-success">ویرایش</button>
+    </div>
+</form>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    window.addEventListener('load', function() {
+    // Get the source div and target div by their IDs
+    var sourceDiv = document.getElementById('my_form');
+    var targetDivGeneral = document.getElementById('custom-tabs-three-home');
+    var targetDivInfra = document.getElementById('custom-tabs-three-profile');
+    var targetDivOther = document.getElementById('custom-tabs-three-messages');
+
+    // Get the first child elements of the source div
+    let part1 = 26;
+    let part2 = 37 + part1;
+    let part3 = 12 + part2;
+    var childElementsGeneral = Array.from(sourceDiv.children).slice(0, part1);
+    var childElementsInfra = Array.from(sourceDiv.children).slice(part1, part2);
+    var childElementsOther = Array.from(sourceDiv.children).slice(part2, part3);
+
+    // Move the child elements to the target div
+    childElementsGeneral.forEach(function(element) {
+        targetDivGeneral.appendChild(element);
+    });
+    // Move the child elements to the target div
+    childElementsInfra.forEach(function(element) {
+        targetDivInfra.appendChild(element);
+    });
+    // Move the child elements to the target div
+    childElementsOther.forEach(function(element) {
+        targetDivOther.appendChild(element);
+    });
+    });
+</script>
 {% endblock %}

@@ -27,7 +27,7 @@
     {% elif field.2 == 'TextField' %}
     <div class="callout callout-info">
         <h5>{{field.0}}</h5>
-        <p>{{field.1}}</p>
+        <p>{{field.1|safe}}</p>
     </div>
     {% else %}
     <dl class="row col-4 m-3">
