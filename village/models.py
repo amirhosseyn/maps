@@ -146,3 +146,6 @@ class Village(models.Model):
         default="", blank=True, null=True, verbose_name="راه‌حل فراهم کردن نیاز های اصلی")
     proposed_entrepreneurship_plan = models.TextField(
         default="", null=True, blank=True, verbose_name="طرح کارآفرینی  پیشنهادی برای روستا")
+    
+    def get_fields(self):
+        return [(field.verbose_name, field.value_from_object(self),field.get_internal_type()) for field in self._meta.fields]
