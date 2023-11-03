@@ -20,7 +20,6 @@ class VillageCreateView(LoginRequiredMixin,CreateView):
     model = Village
     form_class = VillageForm
     template_name = "village_form.html"
-    # fields = ['name', 'latitude', 'longitude']
     success_url = reverse_lazy("index")
 
     def get_context_data(self, **kwargs):
