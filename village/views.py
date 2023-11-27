@@ -42,7 +42,7 @@ class VillageUpdateView(LoginRequiredMixin,UpdateView):
     template_name = "village_update.html"
     success_url = reverse_lazy("village_list_view")
 
-class VillageListView(LoginRequiredMixin,ListView):
+class VillageListView(ListView):
     model = Village
     template_name = "village_list.html"
     delete_view = VillageDeleteView
